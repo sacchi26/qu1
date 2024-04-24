@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.todo{
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    border-left: 3px solid #3498db;
+}
+
+.todo-item.completed {
+    border-left-color: #2ecc71;
+    text-decoration: line-through;
+}
+</style>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <ul id="todo" class="todo-list"> </ul>
+    </div>
+    
+</body>
+<script>
+    let todo = document.querySelector("#todo")
+
+
+function getdata(URL){
+fetch(URL)
+.then(function(res){
+    res = res.json()
+    return res
+})
+.then(function(res){
+    console.log(res)
+    showdata(res)
+})
+}
+
+function showdata(arr){
+//console.log(arr)
+arr.forEach(function(ele,i){
+    let box = document.createElement("div")
+    let h3 = document.createElement("h3")
+    h3.innerHTML = ele.title
+
+    
+    box.append(h3)
+    todo.append(box)
+})
+}
+
+getdata("https://jsonplaceholder.typicode.com/todos")
+
+    
+</script>
+</html>
